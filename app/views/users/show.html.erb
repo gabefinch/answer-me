@@ -1,0 +1,5 @@
+<% if @user == current_user %>
+  <%= @user.username %>
+<% else %>
+  Not logged in as <%= @user.username %>.
+<% end %>
