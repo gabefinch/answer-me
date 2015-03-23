@@ -11,7 +11,7 @@ class ResponsesController < ApplicationController
     @response.question_id = params[:question_id]
     if @response.save
       flash[:notice] = "Response added!"
-      redirect_to user_question_path(params[:user_id], params[:question_id])
+      redirect_to question_path(@response.question)
     else
       flash[:error] = "Failure."
       render :new

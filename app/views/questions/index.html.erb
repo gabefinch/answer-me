@@ -1,0 +1,17 @@
+<div class="row">
+<div class="col-sm-3"></div>
+
+<div class="col-sm-6">
+  <h1>Smaug Lavaflow</h1>
+  <ul class="list-group">
+    <% @questions.each do |question| %>
+    <li class="list-group-item">
+        <span class="badge"><%= question.responses.count %></span>
+        <%= link_to question.title, question_path(question) %>
+      </li>
+    <% end %>
+  </ul>
+</div>
+
+<div class="col-sm-3"></div>
+</div>

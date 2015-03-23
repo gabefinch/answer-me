@@ -1,9 +1,8 @@
 Rails.application.routes.draw do
   root to: 'users#index'
-  resources :users do
-    resources :questions do
-      resources :responses
-    end
+  resources :users
+  resources :questions do
+    resources :responses
   end
 
   get 'login', to: "sessions#new"

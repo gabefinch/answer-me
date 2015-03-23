@@ -1,22 +1,24 @@
 class QuestionsController < ApplicationController
 
+  def index
+    @questions = Question.all
+  end
+
   def show
-    @user = User.find(params[:user_id])
     @question = Question.find(params[:id])
   end
 
   def new
-    @user = User.find(params[:user_id])
     @question = Question.new
   end
 
   def create
-    @user = User.find(params[:user_id])
-    if @user == current_user
-      @question = @user.questions.new(question_params)
+    if current_user != nil
+      @question = Question.new(question_params)
+      @question.user_id = current_user.id
       if @question.save
         flash[:notice] = "Question added!"
-        redirect_to user_path(@user)
+        redirect_to user_path(current_user)
       else
         flash[:error] = "Question not added."
         render :new
