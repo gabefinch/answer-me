@@ -1,5 +1,16 @@
+<h3><%= @user.username %></h3>
+
 <% if @user == current_user %>
-  <%= @user.username %>
-<% else %>
-  Not logged in as <%= @user.username %>.
+  <%= link_to "Add question", new_user_question_path(@user, Question.new)%>
+<% end %>
+
+<% if @user.questions.any? %>
+  <h2>Questions from <%= @user.username %></h2>
+  <ul class="list-unstyled">
+    <% @user.questions.each do |question| %>
+      <li>
+        <%= link_to question.title, user_question_path(@user, question) %>
+      </li>
+    <% end %>
+  </ul>
 <% end %>
