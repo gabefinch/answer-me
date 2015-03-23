@@ -1,8 +1,7 @@
 require 'rails_helper'
 
-describe Question do
-  it { should validate_presence_of :title }
+describe Response do
   it { should validate_presence_of :body }
   it { should belong_to :user }
-  it { should have_many :responses }
+  it { should belong_to :question }
 end

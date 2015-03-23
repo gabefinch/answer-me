@@ -12,13 +12,17 @@ class QuestionsController < ApplicationController
 
   def create
     @user = User.find(params[:user_id])
-    @question = @user.questions.new(question_params)
-    if @question.save
-      flash[:notice] = "Question added!"
-      redirect_to user_path(@user)
+    if @user == current_user
+      @question = @user.questions.new(question_params)
+      if @question.save
+        flash[:notice] = "Question added!"
+        redirect_to user_path(@user)
+      else
+        flash[:error] = "Question not added."
+        render :new
+      end
     else
-      flash[:error] = "Question not added."
-      render :new
+      redirect_to users_path
     end
   end
 
