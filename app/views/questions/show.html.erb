@@ -1,2 +1,15 @@
 <h2><%= @question.title %><h2>
 <h5 class="well"><%= @question.body %></h5>
+
+<%= link_to "Respond", new_user_question_response_path(@question.user, @question, Response.new) %>
+
+<% if @question.responses.any? %>
+  <h2>Responses</h2>
+  <ul class="list-unstyled">
+    <% @question.responses.each do |response| %>
+      <li>
+        <%= response.user.username %>: "<%= response.body %>""
+      </li>
+    <% end %>
+  </ul>
+<% end %>

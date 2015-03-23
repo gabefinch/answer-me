@@ -1,0 +1,6 @@
+<%= bootstrap_form_for([@user, @question, @response]) do |f| %>
+  <div class="form-group">
+    <%= f.text_area :body %>
+  </div>
+  <%= f.submit %>
+<% end %>
