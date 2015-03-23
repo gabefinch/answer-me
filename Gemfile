@@ -13,6 +13,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'bootstrap-sass', '~> 3.3.4'
 gem 'bootstrap_form'
 gem 'bootswatch-rails'
+gem 'letter_opener', :group => :development
 
 group :development, :test do
   gem 'byebug'
