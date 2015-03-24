@@ -28,6 +28,15 @@ class QuestionsController < ApplicationController
     end
   end
 
+  def update
+    @question = Question.find(params[:id])
+    if current_user == @question.user
+      @question.best_response = Response.find(params[:question][:best_response_id].to_i)
+      @question.save
+    end
+    redirect_to question_path(@question)
+  end
+
 private
   def question_params
     params.require(:question).permit(:title, :body)

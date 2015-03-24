@@ -10,7 +10,19 @@
   <ul class="list-unstyled">
     <% @question.responses.each do |response| %>
       <li>
-        <%= response.user.username %>: &ldquo;<%= response.body %>&rdquo;
+        <% if current_user == @question.user %>
+          <%= bootstrap_form_for @question do |f| %>
+            <% if response == @question.best_response %>
+              best response:<br>
+            <% end %>
+            <%= response.user.username %>: &ldquo;<%= response.body %>&rdquo;
+            <input name="_method" type="hidden" value="patch">
+            <%= f.hidden_field :best_response_id, :value => response.id %>
+            <button type="submit" class="btn btn-success btn-xs">mark as best</button>
+          <% end %>
+        <% else %>
+          <%= response.user.username %>: &ldquo;<%= response.body %>&rdquo;
+        <% end %>
       </li>
     <% end %>
   </ul>
