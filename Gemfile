@@ -27,6 +27,7 @@ group :test do
   gem 'capybara'
   gem 'rspec-rails'
   gem 'shoulda-matchers'
+  gem 'factory_girl_rails'
 end
 
 group :production do

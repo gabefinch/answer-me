@@ -1,0 +1,10 @@
+<%= @user.username %>, <%= @response.user.username %> responded to your question.
+<hr>
+Question:<br>
+<%= @question.title %><br>
+<%= @question.body %>
+<hr>
+Response from <%= @response.user.username %>:<br>
+<%= @response.body %>
+<hr>
+<p><%= link_to "view response", question_url(@question) %></p>
