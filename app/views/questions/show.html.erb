@@ -24,8 +24,15 @@
       <% if @question.best_response %>
         <div class="best-response-display panel panel-info">
           <div class="panel-heading">
+            <span class="badge"><%= @question.best_response.votes.count %></span>
             Best Response chosen by <%= @question.user.username %><br>
             Response courtesy of <%= @question.best_response.user.username %>
+            <div class="pull-right">
+              <%= bootstrap_form_for Vote.new do |f| %>
+                <%= f.hidden_field :response_id, :value => @question.best_response.id %>
+                <button type="submit" class="btn btn-default btn-xs">+1</button>
+              <% end %>
+            </div>
           </div>
           <div class="panel-body">
             &ldquo;<%= @question.best_response.body %>&rdquo;
@@ -40,7 +47,19 @@
 
             <div class="panel-heading">
 
+              <span class="badge"><%= response.votes.count %></span>
               <%= response.user.username %>
+
+              <% if logged_in? %>
+                <div class="plusone pull-right">
+
+                  <%= bootstrap_form_for Vote.new do |f| %>
+                    <%= f.hidden_field :response_id, :value => response.id %>
+                    <button type="submit" class="btn btn-default btn-xs">+1</button>
+                  <% end %>
+
+                </div>
+              <% end %>
 
               <div class="response pull-right">
                 <% if current_user == @question.user %>
