@@ -6,4 +6,11 @@ class UserMailer < ActionMailer::Base
     mail to: "gabefinch@gmail.com", subject: "You've got mail!"
   end
 
+  def responded(response)
+    @response = response
+    @question = response.question
+    @user = @question.user
+    mail to: @user.username, subject: "You've got a response on Smaug Lavaflow!"
+  end
+
 end

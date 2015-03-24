@@ -11,6 +11,7 @@ class ResponsesController < ApplicationController
     @response.question_id = params[:question_id]
     if @response.save
       flash[:notice] = "Response added!"
+      UserMailer.responded(@response).deliver
       redirect_to question_path(@response.question)
     else
       flash[:error] = "Failure."
