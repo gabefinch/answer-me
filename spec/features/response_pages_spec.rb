@@ -12,7 +12,7 @@ describe 'sending email on response' do
     fill_in 'Password', with: 'password'
     click_button 'Login'
     visit question_path(question)
-    click_on 'Respond'
+    click_on 'Leave a response'
     fill_in 'Body', with: 'foo'
     click_button 'Create Response'
     ActionMailer::Base.deliveries.last.to.should eq [user.username]

@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   has_many :questions
   has_many :responses
+  has_many :votes
   validates :username, presence: true
   validates_uniqueness_of :username
   validates_length_of :password, minimum: 8
