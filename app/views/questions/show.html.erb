@@ -40,7 +40,7 @@
         </div>
       <% end %>
 
-      <% @question.responses.each do |response| %>
+      <% @question.responses.sort_by(&:vote_count).reverse.each do |response| %>
         <% unless response == @question.best_response %>
 
           <div class="panel panel-default">
