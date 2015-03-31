@@ -1,4 +1,7 @@
 <li class="list-group-item" id="question_<%= question.id %>">
   <span class="badge"><%= question.responses.count %></span>
-  <%= link_to question.title, question_path(question) %><%= link_to '<i class="glyphicon glyphicon-trash pull-right"></i>'.html_safe, question_path(question), method: :delete, id: "delete_question_#{question.id}", remote: true %>
+  <%= link_to question.title, question_path(question) %>
+  <% if question.user == current_user %>
+    <%= link_to '<i class="glyphicon glyphicon-trash pull-right"></i>'.html_safe, question_path(question), method: :delete, id: "delete_question_#{question.id}", remote: true %>
+  <% end %>
 </li>

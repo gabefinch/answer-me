@@ -22,7 +22,7 @@ class QuestionsController < ApplicationController
             flash[:notice] = "Question added!"
             redirect_to user_path(current_user)
           end
-          format.js
+          format.js { flash.now[:notice] = "Question added!" }
         end
       else
         respond_to do |format|
@@ -53,10 +53,12 @@ class QuestionsController < ApplicationController
 
   def destroy
     @question = Question.find(params[:id])
-    @question.destroy
-    respond_to do |format|
-      format.html {redirect_to root_path}
-      format.js
+    if @question.user == current_user
+      @question.destroy
+      respond_to do |format|
+        format.html {redirect_to root_path}
+        format.js
+      end
     end
   end
 
