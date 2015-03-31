@@ -14,5 +14,25 @@
  *= require_self
  */
 
+@import "bootstrap-sprockets";
 @import "bootswatch/darkly/variables";
 @import "bootstrap";
+
+#all-questions-list {
+  margin-top: 20px;
+}
+
+.glyphicon-trash {
+  font-size: 14px;
+  color: gray;
+  margin-right: 10px;
+  margin-top: 2px;
+}
+
+.question-title {
+  margin-top: 5px;
+}
+
+#responses-display {
+  margin-top: 20px;
+}

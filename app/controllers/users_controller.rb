@@ -17,7 +17,7 @@ class UsersController < ApplicationController
       flash[:notice] = 'You successfully registered!'
       session[:user_id] = @user.id
       UserMailer.signup_confirmation(@user).deliver
-      redirect_to users_path
+      redirect_to root_path
     else
       flash[:error] = 'Errors in your submission. Try again.'
       render :new

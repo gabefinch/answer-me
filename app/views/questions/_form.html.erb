@@ -1,4 +1,5 @@
-<%= bootstrap_form_for([@user, @question]) do |f| %>
+<%= bootstrap_form_for @question, remote: true do |f| %>
+<span id="new_question_errors"></span>
 
   <div class="form-group">
     <%= f.text_field :title %>

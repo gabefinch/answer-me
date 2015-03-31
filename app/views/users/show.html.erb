@@ -3,10 +3,6 @@
   <div class="col-sm-6">
     <h2><%= @user.username %></h2>
 
-    <% if @user == current_user %>
-      <%= link_to "Add question", new_question_path(current_user, Question.new)%>
-    <% end %>
-
     <% if @user.questions.any? %>
       <h4>Questions from <%= @user.username %></h4>
       <ul class="list-group">
