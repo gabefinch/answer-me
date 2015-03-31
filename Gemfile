@@ -28,6 +28,8 @@ group :test do
   gem 'rspec-rails'
   gem 'shoulda-matchers'
   gem 'factory_girl_rails'
+  gem 'poltergeist'
+  gem 'database_cleaner'
 end
 
 group :production do
