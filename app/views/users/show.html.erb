@@ -6,7 +6,7 @@
     <% if @user.questions.any? %>
     <div class="panel panel-info">
       <div class="panel-heading">
-        <h3 class="panel-title">Questions <span class="badge"><%= @user.questions.count %></span></h3>
+        <h3 class="panel-title">My Questions <span class="badge"><%= @user.questions.count %></span></h3>
       </div>
       <div class="panel-body">
         <ul class="list-group">
@@ -26,6 +26,27 @@
 
     <% if @user == current_user %>
       <%= link_to "Add question", new_question_path(current_user, Question.new), class: "btn btn-default btn-lg btn-block"%>
+    <% end %>
+    <hr>
+
+    <% if @user.responses.any? %>
+    <div class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title">My Responses <span class="badge"><%= @user.responses.count %></span></h3>
+      </div>
+      <div class="panel-body">
+        <ul class="list-group">
+          <% @user.responses.each do |response| %>
+            <li class="list-group-item">
+              <%= link_to response.question.title, question_path(response.question) %>
+              <small>
+                <%= distance_of_time_in_words_to_now(response.created_at) %> ago
+              </small>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+      </div>
     <% end %>
 
   </div>
