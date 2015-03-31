@@ -23,7 +23,7 @@ describe 'login' do
   it 'logs user in' do
     user = FactoryGirl.create(:user)
     visit '/'
-    click_on 'Login'
+    click_on 'login-button'
     fill_in 'Username', with: user.username
     fill_in 'Password', with: 'password'
     click_button 'Login'

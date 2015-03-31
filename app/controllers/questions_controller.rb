@@ -53,13 +53,13 @@ class QuestionsController < ApplicationController
 
   def destroy
     @question = Question.find(params[:id])
-    if @question.user == current_user
-      @question.destroy
-      respond_to do |format|
-        format.html {redirect_to root_path}
-        format.js
+    Response.all.each do |response|
+      if response.question == @question
+        response.destroy
       end
     end
+    @question.destroy
+    redirect_to user_path(current_user)
   end
 
 private

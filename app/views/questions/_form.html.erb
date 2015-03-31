@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-<div class="row">
+<div class="row" id="new-question-panel">
   <div class="col-sm-2"></div>
   <div class="col-sm-8">
     <div class="panel panel-primary">
@@ -17,7 +16,7 @@
           <div class="form-group">
             <%= f.text_area :body %>
           </div>
-          <%= f.submit %>
+          <%= f.submit "Create Question", class: "btn btn-warning", id: "question_create_btn"%>
         <% end %>
       </div>
     </div>

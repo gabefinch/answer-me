@@ -15,10 +15,12 @@ describe 'Adding a question' do
   it 'adds a question using ajax', js:true do
     user = FactoryGirl.create(:user)
     login(user)
+    visit user_path(user)
     click_on 'Add question'
     fill_in 'Title', with: 'Why?'
     fill_in 'Body', with: 'What does it sound like when doves cry?'
-    click_button 'Create Question'
+    click_button 'question_create_btn'
+
     expect(page).to have_content 'Why?'
   end
 
@@ -42,7 +44,8 @@ describe 'the deleting a question process' do
   it 'deletes a question', js: true do
     user = FactoryGirl.create(:user)
     question = FactoryGirl.create(:question, user: user)
-    visit root_path
+    visit question_path(question)
+    save_screenshot('~/Desktop/file.png')
     page.find("#delete_question_#{question.id}").trigger('click')
     expect(page).to_not have_content question.title
   end

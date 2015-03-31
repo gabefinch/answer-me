@@ -12,16 +12,17 @@
       <div class="col-sm-8 col-sm-offset-2" id="responses-display">
 
       <h4>Responses:</h4>
+
       <% if @question.best_response %>
         <div class="best-response-display panel panel-info">
-          <div class="panel-heading">
 
+          <div class="panel-heading">
             <strong>Selected Best Response</strong>
             <span class="pull-right">Votes <span class="badge"><%= @question.best_response.votes.count %></span></span>
             <br>
             <%= @question.best_response.user.username %>
-
           </div>
+
           <div class="panel-body">
             &ldquo;<%= @question.best_response.body %>&rdquo;
             <small class="pull-right">
@@ -35,54 +36,18 @@
                 <button type="submit" class="btn btn-default btn-xs">+1</button>
               <% end %>
             </div>
-
           </div>
+
         </div>
       <% end %>
 
       <% @question.responses.sort_by(&:vote_count).reverse.each do |response| %>
         <% unless response == @question.best_response %>
+          <%= render response %>
+        <% end %>
+      <% end %>
 
-          <div class="panel panel-primary">
-
-            <div class="panel-heading">
-              <%= response.user.username %>
-              <span class="pull-right">Votes <span class="badge"><%= response.votes.count %></span></span>
-            </div> <!-- end panel-heading -->
-
-            <div class="panel-body">
-              &ldquo;<%= response.body %>&rdquo;
-              <small class="pull-right">
-                <%= distance_of_time_in_words_to_now(response.created_at) %> ago
-              </small>
-              <br>
-
-              <% if logged_in? %>
-                <div class="plusone pull-right">
-                  <%= bootstrap_form_for Vote.new do |f| %>
-                    <%= f.hidden_field :response_id, :value => response.id %>
-                    <button type="submit" class="btn btn-default btn-xs">+1</button>
-                  <% end %>
-                </div>
-              <% end %>
-
-              <div class="response">
-                <% if current_user == @question.user %>
-                  <%= bootstrap_form_for @question do |f| %>
-                    <input name="_method" type="hidden" value="patch">
-                    <%= f.hidden_field :best_response_id, :value => response.id %>
-                    <button type="submit" class="btn btn-default btn-xs">mark as best</button>
-                  <% end %>
-                <% end %>
-              </div>
-            </div> <!-- end panel-body -->
-
-          </div> <!-- end panel -->
-
-        <% end %> <!-- end unless -->
-      <% end %> <!-- end each -->
-
-      </div> <!-- end col-sm-8 -->
-    <% end %> <!-- end if any responses -->
+      </div>
+    <% end %>
 
 </div> <!-- end row -->
