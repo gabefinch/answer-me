@@ -28,6 +28,7 @@
               <%= current_user.username %><span class="caret"></span>
             </a>
             <ul class="dropdown-menu" role="menu">
+              <li><a href="/users/<%= current_user.id %>">Home</a></li>
               <li><a href="/logout">Logout</a></li>
             </ul>
           </li>
