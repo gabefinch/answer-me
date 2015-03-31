@@ -1,7 +1,6 @@
 class QuestionsController < ApplicationController
 
   def index
-    sleep 1
     @questions = Question.all
   end
 
@@ -18,14 +17,25 @@ class QuestionsController < ApplicationController
       @question = Question.new(question_params)
       @question.user_id = current_user.id
       if @question.save
-        flash[:notice] = "Question added!"
         respond_to do |format|
-          format.html {redirect_to user_path(current_user)}
+          format.html do
+            flash[:notice] = "Question added!"
+            redirect_to user_path(current_user)
+          end
           format.js
         end
       else
-        flash[:error] = "Question not added."
-        render :new
+        respond_to do |format|
+          format.html do
+            flash[:error] = "Question not added."
+            render :new
+          end
+          format.js do
+            render :error
+          end
+        end
+
+
       end
     else
       redirect_to users_path
@@ -39,6 +49,15 @@ class QuestionsController < ApplicationController
       @question.save
     end
     redirect_to question_path(@question)
+  end
+
+  def destroy
+    @question = Question.find(params[:id])
+    @question.destroy
+    respond_to do |format|
+      format.html {redirect_to root_path}
+      format.js
+    end
   end
 
 private

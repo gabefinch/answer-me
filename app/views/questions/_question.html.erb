@@ -1,4 +1,4 @@
-<li class="list-group-item">
+<li class="list-group-item" id="question_<%= question.id %>">
   <span class="badge"><%= question.responses.count %></span>
-  <%= link_to question.title, question_path(question) %>
+  <%= link_to question.title, question_path(question) %><%= link_to "Delete", question_path(question), method: :delete, class: "pull-right", id: "delete_question_#{question.id}", remote: true %>
 </li>
