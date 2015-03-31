@@ -1,4 +1,4 @@
-Smaug-Lavaflow, a Stack Overflow clone
+AnswerMe, a Stack Overflow clone
 ======================================
 
 by Gabe Finch & Mike Goren
@@ -8,9 +8,9 @@ This is a simple Ruby/Rails Stack Overflow clone.
 Installation
 ------------
 
-Install smaug-lavaflow by first cloning the repository.  
+Install answer-me by first cloning the repository.  
 ```
-$ git clone http://github.com/mgoren/smaug-lavaflow.git
+$ git clone http://github.com/mgoren/answer-me.git
 ```
 
 Start the database:

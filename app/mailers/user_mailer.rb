@@ -14,7 +14,7 @@ class UserMailer < ActionMailer::Base
     @response = response
     @question = response.question
     @user = @question.user
-    mail to: @user.username, subject: "You've got a response on Smaug Lavaflow!"
+    mail to: @user.username, subject: "You've got a response on Answer Me!"
   end
 
 end
