@@ -3,12 +3,7 @@
   <div class="col-sm-2"></div>
   <div class="col-sm-8">
     <% if current_user != nil %>
-    <div class="panel panel-warning">
-      <div class="panel-body">
-        <%= link_to "Leave a response", new_question_response_path(@question, Response.new) %>
-      </div>
-    </div>
-
+        <%= link_to "Leave a response", new_question_response_path(@question, Response.new), class:"btn btn-default btn-lg btn-block" %>
     <% end %>
 
     <% if @question.responses.any? %>
