@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
   def new
-    
+
   end
 
   def create
@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:password])
       flash[:notice] = 'You are logged in!'
       session[:user_id] = user.id
-      redirect_to user_path(user)
+      redirect_to root_path
     else
       flash[:error] = 'Unsuccessful login attempt!'
       render 'new'

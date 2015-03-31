@@ -1,12 +1,15 @@
 <%= render @question %>
 <div class="row">
-  <div class="col-sm-2"></div>
-  <div class="col-sm-8">
+  <div class="col-sm-8 col-sm-offset-2">
     <% if current_user != nil %>
-        <%= link_to "Leave a response", new_question_response_path(@question, Response.new), class:"btn btn-default btn-lg btn-block" %>
+      <%= link_to "Leave a response", new_question_response_path(@question), class: "btn btn-default btn-lg btn-block" %>
     <% end %>
+  </div>
+</div>
 
+<div class="row">
     <% if @question.responses.any? %>
+      <div class="col-sm-8 col-sm-offset-2" id="responses-display">
 
       <h4>Responses:</h4>
       <% if @question.best_response %>
@@ -79,11 +82,7 @@
         <% end %> <!-- end unless -->
       <% end %> <!-- end each -->
 
+      </div> <!-- end col-sm-8 -->
     <% end %> <!-- end if any responses -->
-
-  </div> <!-- end col-sm-8 -->
-
-  <div class="col-sm-2">
-  </div>
 
 </div> <!-- end row -->

@@ -1,18 +1,25 @@
 require 'rails_helper'
 
 describe 'Adding a question' do
-  it 'add a question under a user' do
+  it 'adds a question under a user' do
     user = FactoryGirl.create(:user)
-    visit '/'
-    click_on 'Login'
-    fill_in 'Username', with: user.username
-    fill_in 'Password', with: 'password'
-    click_button 'Login'
+    login(user)
+    visit user_path(user)
     click_on 'Add question'
     fill_in 'Title', with: 'Why?'
     fill_in 'Body', with: 'What does it sound like when doves cry?'
     click_button 'Create Question'
     expect(page).to have_content 'Question added!'
+  end
+
+  it 'adds a question using ajax', js:true do
+    user = FactoryGirl.create(:user)
+    login(user)
+    click_on 'Add question'
+    fill_in 'Title', with: 'Why?'
+    fill_in 'Body', with: 'What does it sound like when doves cry?'
+    click_button 'Create Question'
+    expect(page).to have_content 'Why?'
   end
 
 end
@@ -22,13 +29,22 @@ describe 'associating response with question' do
   it 'assocates response with question and user' do
     user = FactoryGirl.create(:user)
     user2 = FactoryGirl.create(:user, username: "foo@foo.com")
-    question = FactoryGirl.create(:question)
-    user.questions.push(question)
-    response = FactoryGirl.create(:response, user: user2)
-    question.responses.push(response)
+    question = FactoryGirl.create(:question, user: user)
+    response = FactoryGirl.create(:response, question: question, user: user2)
     visit user_path(user)
-    click_link 'WTF?'
-    expect(page).to have_content 'Press the power button.'
+    click_link question.title
+    expect(page).to have_content response.body
+  end
+
+end
+describe 'the deleting a question process' do
+
+  it 'deletes a question', js: true do
+    user = FactoryGirl.create(:user)
+    question = FactoryGirl.create(:question, user: user)
+    visit root_path
+    page.find("#delete_question_#{question.id}").trigger('click')
+    expect(page).to_not have_content question.title
   end
 
 end

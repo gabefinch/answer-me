@@ -34,14 +34,10 @@ end
 describe 'user view' do
   it 'displays user view' do
     user = FactoryGirl.create(:user)
-    visit '/'
-    click_on 'Login'
-    fill_in 'Username', with: user.username
-    fill_in 'Password', with: 'password'
-    click_button 'Login'
-    visit '/'
+    login(user)
+    visit '/users/'
     click_link "user-link-#{user.id}"
-    expect(page).to have_content 'Add question'
+    expect(page).to have_content user.username
   end
 
 end

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div class="row">
   <div class="col-sm-2"></div>
   <div class="col-sm-8">
@@ -8,7 +9,8 @@
         </h3>
       </div>
       <div class="panel-body">
-        <%= bootstrap_form_for([@user, @question]) do |f| %>
+        <%= bootstrap_form_for @question, remote: true do |f| %>
+          <span id="new_question_errors"></span>
           <div class="form-group">
             <%= f.text_field :title %>
           </div>
