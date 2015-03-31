@@ -42,7 +42,7 @@ describe 'the deleting a question process' do
     user = FactoryGirl.create(:user)
     question = FactoryGirl.create(:question, user: user)
     visit root_path
-    click_on "delete_question_#{question.id}"
+    page.find("#delete_question_#{question.id}").trigger('click')
     expect(page).to_not have_content question.title
   end
 
