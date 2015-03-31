@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'Adding a question' do
-  it 'add a question under a user' do
+  it 'adds a question under a user' do
     user = FactoryGirl.create(:user)
     login(user)
     click_on 'Add question'
@@ -11,8 +11,14 @@ describe 'Adding a question' do
     expect(page).to have_content 'Question added!'
   end
 
-  it 'add a question using ajax' do
-    visit root_path
+  it 'adds a question using ajax', js:true do
+    user = FactoryGirl.create(:user)
+    login(user)
+    click_on 'Add question'
+    fill_in 'Title', with: 'Why?'
+    fill_in 'Body', with: 'What does it sound like when doves cry?'
+    click_button 'Create Question'
+    expect(page).to have_content 'Why?'
 
   end
 

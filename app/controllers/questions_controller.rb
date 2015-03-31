@@ -1,6 +1,7 @@
 class QuestionsController < ApplicationController
 
   def index
+    sleep 1
     @questions = Question.all
   end
 
@@ -18,7 +19,10 @@ class QuestionsController < ApplicationController
       @question.user_id = current_user.id
       if @question.save
         flash[:notice] = "Question added!"
-        redirect_to user_path(current_user)
+        respond_to do |format|
+          format.html {redirect_to user_path(current_user)}
+          format.js
+        end
       else
         flash[:error] = "Question not added."
         render :new

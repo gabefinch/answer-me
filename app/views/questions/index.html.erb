@@ -5,16 +5,11 @@
   <h1>Smaug Lavaflow</h1>
 
   <% if current_user %>
-    <%= link_to "Add question", new_question_path(current_user, Question.new), class: "btn btn-info btn-sm", id: "add-question-btn" %>
+    <%= link_to "Add question", new_question_path, class: "btn btn-info btn-sm", id: "add-question-btn", remote: true %>
   <% end %>
 
-  <ul class="list-group">
-    <% @questions.each do |question| %>
-    <li class="list-group-item">
-        <span class="badge"><%= question.responses.count %></span>
-        <%= link_to question.title, question_path(question) %>
-      </li>
-    <% end %>
+  <ul class="list-group" id="all-questions-list">
+    <%= render @questions.reverse %>
   </ul>
 </div>
 
