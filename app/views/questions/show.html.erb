@@ -1,41 +1,43 @@
+<%= render @question %>
 <div class="row">
-  <div class="col-sm-3"></div>
-  <div class="col-sm-6">
-    <h2 class="text-danger"><%= @question.title %></h2>
-    <h5 class="well"><%= @question.body %></h5>
-  </div>
-  <div class="col-sm-3"></div>
-</div>
-
-<div class="row">
-
   <div class="col-sm-2"></div>
-
-  <div class="col-sm-8 well">
-
+  <div class="col-sm-8">
     <% if current_user != nil %>
-      <%= link_to "Leave a response", new_question_response_path(@question, Response.new) %>
+    <div class="panel panel-warning">
+      <div class="panel-body">
+        <%= link_to "Leave a response", new_question_response_path(@question, Response.new) %>
+      </div>
+    </div>
+
     <% end %>
 
     <% if @question.responses.any? %>
 
       <h4>Responses:</h4>
-      <hr>
       <% if @question.best_response %>
         <div class="best-response-display panel panel-info">
           <div class="panel-heading">
-            <span class="badge"><%= @question.best_response.votes.count %></span>
-            Best Response chosen by <%= @question.user.username %><br>
-            Response courtesy of <%= @question.best_response.user.username %>
+
+            <strong>Selected Best Response</strong>
+            <span class="pull-right">Votes <span class="badge"><%= @question.best_response.votes.count %></span></span>
+            <br>
+            <%= @question.best_response.user.username %>
+
+          </div>
+          <div class="panel-body">
+            &ldquo;<%= @question.best_response.body %>&rdquo;
+            <small class="pull-right">
+              <%= distance_of_time_in_words_to_now(@question.best_response.created_at) %> ago
+            </small>
+            <br>
             <div class="pull-right">
               <%= bootstrap_form_for Vote.new do |f| %>
+
                 <%= f.hidden_field :response_id, :value => @question.best_response.id %>
                 <button type="submit" class="btn btn-default btn-xs">+1</button>
               <% end %>
             </div>
-          </div>
-          <div class="panel-body">
-            &ldquo;<%= @question.best_response.body %>&rdquo;
+
           </div>
         </div>
       <% end %>
@@ -43,25 +45,30 @@
       <% @question.responses.sort_by(&:vote_count).reverse.each do |response| %>
         <% unless response == @question.best_response %>
 
-          <div class="panel panel-default">
+          <div class="panel panel-primary">
 
             <div class="panel-heading">
-
-              <span class="badge"><%= response.votes.count %></span>
               <%= response.user.username %>
+              <span class="pull-right">Votes <span class="badge"><%= response.votes.count %></span></span>
+            </div> <!-- end panel-heading -->
+
+            <div class="panel-body">
+              &ldquo;<%= response.body %>&rdquo;
+              <small class="pull-right">
+                <%= distance_of_time_in_words_to_now(response.created_at) %> ago
+              </small>
+              <br>
 
               <% if logged_in? %>
                 <div class="plusone pull-right">
-
                   <%= bootstrap_form_for Vote.new do |f| %>
                     <%= f.hidden_field :response_id, :value => response.id %>
                     <button type="submit" class="btn btn-default btn-xs">+1</button>
                   <% end %>
-
                 </div>
               <% end %>
 
-              <div class="response pull-right">
+              <div class="response">
                 <% if current_user == @question.user %>
                   <%= bootstrap_form_for @question do |f| %>
                     <input name="_method" type="hidden" value="patch">
@@ -70,11 +77,6 @@
                   <% end %>
                 <% end %>
               </div>
-
-            </div> <!-- end panel-heading -->
-
-            <div class="panel-body">
-              &ldquo;<%= response.body %>&rdquo;
             </div> <!-- end panel-body -->
 
           </div> <!-- end panel -->

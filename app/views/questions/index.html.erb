@@ -1,17 +1,25 @@
 <div class="row">
-<div class="col-sm-3"></div>
+<div class="col-sm-2"></div>
 
-<div class="col-sm-6">
-  <h1>AnswerMe</h1>
-  <ul class="list-group">
-    <% @questions.each do |question| %>
-    <li class="list-group-item">
-        <span class="badge"><%= question.responses.count %></span>
-        <%= link_to question.title, question_path(question) %>
-      </li>
-    <% end %>
-  </ul>
+<div class="col-sm-8">
+  <div class="panel panel-success">
+    <div class="panel-heading">
+      <h3 class="panel-title">Questions <span class="badge"><%= @questions.count %></span></h3>
+    </div>
+    <div class="panel-body">
+      <ul class="list-group">
+        <% @questions.each do |question| %>
+        <li class="list-group-item">
+            <%= link_to question.title, question_path(question) %> <small><%= distance_of_time_in_words_to_now(question.created_at) %> ago</small>
+            <span class="pull-right">Responses <span class="badge"><%= question.responses.count %></span></span>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+
+
 </div>
 
-<div class="col-sm-3"></div>
+<div class="col-sm-2"></div>
 </div>
