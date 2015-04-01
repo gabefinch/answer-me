@@ -11,7 +11,7 @@ Installation
 
 Install answer-me by first cloning the repository.  
 ```
-$ git clone http://github.com/mgoren/answer-me.git
+$ git clone http://github.com/gabefinch/answer-me.git
 ```
 
 Start the database:
@@ -24,6 +24,7 @@ Create the databases, tables, and test environment by running the following:
 $ rake db:create
 $ rake db:migrate
 $ rake db:test:prepare
+$ rake db:seed
 ```
 
 Start the rails server:
