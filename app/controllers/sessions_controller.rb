@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:password])
       flash[:notice] = 'You are logged in!'
       session[:user_id] = user.id
-      redirect_to root_path
+      redirect_to user_path(user)
     else
       flash[:error] = 'Unsuccessful login attempt!'
       render 'new'
