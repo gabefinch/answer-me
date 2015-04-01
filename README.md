@@ -1,5 +1,6 @@
 AnswerMe, a Stack Overflow clone
 ======================================
+Try it out [here](https://vast-shore-5799.herokuapp.com/users/1).
 
 by Gabe Finch & Mike Goren
 
