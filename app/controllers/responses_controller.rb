@@ -19,6 +19,12 @@ class ResponsesController < ApplicationController
     end
   end
 
+  def destroy
+    @response = Response.find(params[:id])
+    @response.destroy
+    redirect_to :back
+  end
+
   private
     def response_params
       params.require(:response).permit(:body)
