@@ -1,6 +1,9 @@
 <li class="list-group-item">
   <%= link_to question.title, question_path(question) %>
   <small> <%= distance_of_time_in_words_to_now(question.created_at) %> ago</small>
+  <% if question.user == current_user %>
+    <%= link_to '<i class="glyphicon glyphicon-trash"></i>'.html_safe, question_path(question), method: :delete, id: "delete_question_#{question.id}"%>
+  <% end %>
   <span class="pull-right">
     Responses
     <span class="badge">

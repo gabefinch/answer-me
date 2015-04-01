@@ -8,12 +8,7 @@
     </div>
     <div class="panel-body">
       <ul class="list-group">
-        <% @questions.each do |question| %>
-        <li class="list-group-item">
-            <%= link_to question.title, question_path(question) %> <small><%= distance_of_time_in_words_to_now(question.created_at) %> ago</small>
-            <span class="pull-right">Responses <span class="badge"><%= question.responses.count %></span></span>
-          </li>
-        <% end %>
+        <%= render partial: 'listed_question', collection: @questions, as: :question %>
       </ul>
     </div>
   </div>
